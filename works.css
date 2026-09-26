@@ -86,7 +86,20 @@
   .works-hero h1 { font-size:clamp(72px,24vw,150px); margin:36px 0 25px; }
   .works-hero-bottom { grid-template-columns:1fr; gap:20px; }
   .works-hint { display:none; }
-  .filter-bar { top:68px; overflow-x:auto; flex-wrap:nowrap; margin-left:-18px; margin-right:-18px; padding-left:18px; padding-right:18px; scrollbar-width:none; }
+  .filter-bar {
+    top:68px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    flex-wrap:nowrap;
+    width:calc(100% + 32px);
+    max-width:calc(100% + 32px);
+    margin-left:-16px;
+    margin-right:-16px;
+    padding-left:16px;
+    padding-right:16px;
+    scrollbar-width:none;
+    overscroll-behavior-inline:contain;
+  }
   .filter-chip { flex:0 0 auto; }
   .gallery-grid { columns:2 220px; column-gap:12px; }
   .work-card { margin-bottom:24px; }
@@ -269,4 +282,11 @@
     min-width: 38px;
     min-height: 38px;
   }
+}
+
+
+/* v21 — keep the document viewport fixed while chips remain horizontally scrollable */
+@media (max-width: 800px) {
+  .works-page, .works-page main { max-width: 100%; }
+  .filter-bar::-webkit-scrollbar { display: none; }
 }

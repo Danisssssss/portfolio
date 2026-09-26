@@ -15,8 +15,12 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--bg); }
-body { margin: 0; background: var(--bg); color: var(--text); overflow-x: hidden; }
+html { scroll-behavior: smooth; background: var(--bg); width: 100%; max-width: 100%; overflow-x: clip; }
+body { margin: 0; background: var(--bg); color: var(--text); width: 100%; max-width: 100%; overflow-x: clip; overscroll-behavior-x: none; }
+main { width: 100%; max-width: 100%; }
+@supports not (overflow: clip) {
+  html, body { overflow-x: hidden; }
+}
 body, button, a { cursor: default; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
@@ -225,7 +229,7 @@ button { font: inherit; }
 .spotlight-card { position: relative; overflow: hidden; }
 .spotlight-card::before { content: ''; position: absolute; inset: 0; opacity: 0; background: radial-gradient(420px circle at var(--x,50%) var(--y,50%), rgba(95,96,255,.11), transparent 42%); transition: opacity .3s ease; pointer-events: none; }
 .spotlight-card:hover::before { opacity: 1; }
-.capability-card {padding: 26px; background: #111; border: 1px solid var(--line); border-radius: 18px; display: grid; grid-template-columns: 55px 1fr auto; gap: 20px; align-items: end; }
+.capability-card { min-height: 220px; padding: 26px; background: #111; border: 1px solid var(--line); border-radius: 18px; display: grid; grid-template-columns: 55px 1fr auto; gap: 20px; align-items: end; }
 .cap-number { align-self: start; font-size: 10px; color: #77736d; }
 .capability-card h3 { margin: 0 0 10px; font-size: 24px; letter-spacing: -.03em; }
 .capability-card p { margin: 0; max-width: 430px; color: #8f8b84; line-height: 1.55; font-size: 13px; }
@@ -1131,4 +1135,12 @@ body {
 }
 .capability-card .cap-arrow {
   font-weight: 700;
+}
+
+
+/* v21 — mobile horizontal overflow fix */
+@media (max-width: 800px) {
+  .section-shell { max-width: 100%; }
+  .site-header,
+  .mobile-limelight-nav { max-width: calc(100vw - 20px); }
 }
